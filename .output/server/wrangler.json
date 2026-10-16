@@ -1,9 +1,9 @@
 {
-  "compatibility_date": "2026-10-08",
+  "compatibility_date": "2026-10-16",
   "main": "index.mjs",
   "assets": {
     "binding": "ASSETS",
-    "directory": "../public"
+    "directory": "..\\public"
   },
   "name": "atharvak12-press-printit-indore",
   "compatibility_flags": [
