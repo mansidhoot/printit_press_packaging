@@ -1,6 +1,7 @@
-import { t as createMiddleware } from "./server-PDLf5KgK2.mjs";
+import { z as isPromise } from "../_libs/@tanstack/react-router+[...].mjs";
+import { t as createMiddleware } from "./server-DwoXkweE2.mjs";
 import { t as renderErrorPage } from "./ssr.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/start-BR48e6fk.js
+//#region node_modules/.nitro/vite/services/ssr/assets/start-CIlm-iRW.js
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
 	for (let i = 0, len = serializationAdapters.length; i < len; i++) {
 		const current = serializationAdapters[i];
@@ -10,16 +11,19 @@ function dedupeSerializationAdapters(deduped, serializationAdapters) {
 		}
 	}
 }
+function dedupeOptions(options) {
+	if (options.serializationAdapters) {
+		const deduped = /* @__PURE__ */ new Set();
+		dedupeSerializationAdapters(deduped, options.serializationAdapters);
+		options.serializationAdapters = Array.from(deduped);
+	}
+	return options;
+}
 var createStart = (getOptions) => {
 	return {
-		getOptions: async () => {
-			const options = await getOptions();
-			if (options.serializationAdapters) {
-				const deduped = /* @__PURE__ */ new Set();
-				dedupeSerializationAdapters(deduped, options.serializationAdapters);
-				options.serializationAdapters = Array.from(deduped);
-			}
-			return options;
+		getOptions: () => {
+			const options = getOptions();
+			return isPromise(options) ? Promise.resolve(options).then(dedupeOptions) : dedupeOptions(options);
 		},
 		createMiddleware
 	};
